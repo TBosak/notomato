@@ -1,0 +1,66 @@
+// @use 'sass:math';
+// $d: 7.5em;
+// $p: .2*$d;
+// $r: $p*math.sqrt(2);
+// $o: .5*$p;
+// @property --k {
+//     syntax: '<number>';
+//     initial-value: 0;
+//     inherits: true
+// }
+// body,
+// nav,
+// a {
+//     display: grid
+// }
+// body {
+//     place-content: center;
+//     margin: 0;
+//     height: 100vh;
+//     background: black;
+// }
+// nav {
+//     grid-auto-flow: column;
+//     padding: 0 $p;
+//     border-radius: .8*$r;
+//     background: #fff;
+//     --mask: linear-gradient(red 0 0),
+//     radial-gradient(circle at 0 #{$r}, transparent calc(#{$r} + -.5px), gold calc(#{$r} + .5px)) calc((var(--k) + .5)*#{$d} + #{$p} + #{-1.5*$r}) 0/ #{$r $o} no-repeat,
+//     radial-gradient(circle at 100% #{$r}, transparent calc(#{$r} + -.5px), gold calc(#{$r} + .5px)) calc((var(--k) + .5)*#{$d} + #{$p} + #{.5*$r}) 0/ #{$r $o} no-repeat,
+//     radial-gradient(circle at calc((var(--k) + .5)*#{$d} + #{$p}) #{.5*$o}, white calc(#{.5*$o} + -1px), transparent #{.5*$o}),
+//     radial-gradient(circle at calc((var(--k) + .5)*#{$d} + #{$p}) #{-$o}, blue calc(#{$r} + -.5px), transparent calc(#{$r} + .5px));
+//     -webkit-mask: var(--mask);
+//     mask: var(--mask);
+//     -webkit-mask-composite: xor, source-over, source-over;
+//     mask-composite: exclude, add, add;
+//     font: .625em/ 1.5 ubuntu, sans-serif;
+//     transition: --k .35s cubic-bezier(.5, -.5, .5, 1.5)
+// }
+// .nav-item {
+//     --dif: calc(var(--i) - var(--k)); // 0 if they're equal, !== 0 otherwise
+//     --abs: max(-1*var(--dif), var(--dif)); // 0 if i === k, otherwise > 0
+//     --not-sel: min(1, var(--abs)); // 1 if dif in abs value > 0, 0 otherwise
+//     --sel: calc(1 - var(--not-sel)); // complementary
+//     box-sizing: border-box;
+//     place-content: center;
+//     padding-top: $p;
+//     width: $d;
+//     height: $d;
+//     color: hsl(0, 0%, calc(var(--not-sel)*50%));
+//     text-align: center;
+//     text-decoration: none;
+//     text-transform: capitalize;
+//     filter: sepia(var(--hl));
+//     &::before {
+//         font-size: 2em;
+//         filter: brightness(0) contrast(calc(var(--sel)));
+//         content: attr(data-ico)
+//     }
+//     &:focus {
+//         outline: none
+//     }
+//     &:focus,
+//     &:hover {
+//         --hl: 1
+//     }
+// }

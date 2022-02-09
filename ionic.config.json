@@ -1,0 +1,7 @@
+{
+  "name": "PomoDirect",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

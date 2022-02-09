@@ -1,0 +1,23 @@
+ion-card {
+    border-radius: var(--radius-4);
+    box-shadow: var(--shadow-6);
+}
+
+.full-card {
+    height: 100%;
+    width: 100%;
+}
+
+#chron-controls {
+    padding-bottom: var(--size-10);
+}
+
+ion-icon {
+    width: 90%;
+    height: 90%;
+}
+
+icon-inner {
+    width: 90%;
+    height: 90%;
+}

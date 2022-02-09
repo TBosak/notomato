@@ -1,0 +1,102 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Timer
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-row size="12">
+                    <ion-card class="full-card">
+                        <ion-card-header>
+                            <ion-card-title>
+                                <app-chronograph #chronograph></app-chronograph>
+                            </ion-card-title>
+                        </ion-card-header>
+                        <ion-card-content id="chron-controls">
+                            <ion-fab vertical="top" horizontal="center" slot="fixed">
+                                <ion-fab-button>
+                                    <ion-icon src="assets\icon\clock.svg"></ion-icon>
+                                </ion-fab-button>
+                                <ion-fab-list side="top">
+                                    <ion-fab-button (click)="chronograph.startTimer()">
+                                        <ion-icon name="play-circle-outline"></ion-icon>
+                                    </ion-fab-button>
+                                </ion-fab-list>
+                                <ion-fab-list side="end">
+                                    <ion-fab-button (click)="chronograph.stopTimer()">
+                                        <ion-icon name="stop-circle-outline"></ion-icon>
+                                    </ion-fab-button>
+                                </ion-fab-list>
+                                <ion-fab-list side="start">
+                                    <ion-fab-button (click)="chronograph.resetTimer()">
+                                        <ion-icon name="reload-circle-outline"></ion-icon>
+                                    </ion-fab-button>
+                                </ion-fab-list>
+                            </ion-fab>
+                            <ion-fab vertical="top" horizontal="start" slot="fixed">
+                                <ion-fab-button>
+                                    <ion-icon src="assets\icon\coffee.svg"></ion-icon>
+                                </ion-fab-button>
+                                <ion-fab-list side="top">
+                                    <ion-fab-button (click)="setTimer(300,'blue')">
+                                        <ion-label>
+                                            Short
+                                        </ion-label>
+                                    </ion-fab-button>
+                                </ion-fab-list>
+                                <ion-fab-list side="end">
+                                    <ion-fab-button (click)="setTimer(900,'blue')">
+                                        <ion-label>
+                                            Long
+                                        </ion-label>
+                                    </ion-fab-button>
+                                </ion-fab-list>
+                            </ion-fab>
+                            <ion-fab vertical="top" horizontal="end" slot="fixed">
+                                <ion-fab-button>
+                                    <ion-icon src="assets\icon\settings.svg"></ion-icon>
+                                </ion-fab-button>
+                            </ion-fab>
+                            <!-- <ion-button expand="block" (click)="chronograph.startTimer()">Start</ion-button>
+                            <ion-button expand="block" (click)="chronograph.pauseTimer()">Pause</ion-button>
+                            <ion-button expand="block" (click)="chronograph.resumeTimer()">Resume</ion-button>
+                            <ion-button expand="block" (click)="chronograph.stopTimer()">Stop</ion-button>
+                            <ion-button expand="block" (click)="chronograph.resetTimer()">Reset</ion-button> -->
+                            <!-- (click)="setTimer(1800,'blue')" -->
+                        </ion-card-content>
+                    </ion-card>
+                </ion-row>
+                <ion-row>
+                    <ion-card class="full-card">
+                        <ion-card-content>
+                            <ion-item>
+
+                            </ion-item>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-row>
+            </ion-col>
+            <ion-col>
+                <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+                        <ion-item *ngFor="let item of data">
+                            <!-- <ion-avatar item-start>
+                  <img src="{{item.avatar}}">
+                </ion-avatar> -->
+                            <!-- <ion-icon name="clock"></ion-icon> -->
+                            <ion-label>{{item.id}}</ion-label>
+                            <ion-text color="primary">
+                                {{item.name}}
+                            </ion-text>
+                        </ion-item>
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

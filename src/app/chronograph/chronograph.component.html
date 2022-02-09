@@ -1,0 +1,11 @@
+<div class="base-timer">
+    <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+    </g>
+  </svg>
+    <span #label id="base-timer-label" class="base-timer__label">
+      <countdown #cd (event)="handleEvent($event)" [config]="this.countDownConfig | async"></countdown>
+      <!-- {{displayTime | async}} -->
+    </span>
+</div>

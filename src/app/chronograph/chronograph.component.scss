@@ -1,0 +1,40 @@
+/* Sets the containers height and width */
+
+.base-timer {
+    position: relative;
+    height: 18.75em;
+    width: 18.75em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Removes SVG styling that would hide the time label */
+
+.base-timer__circle {
+    fill: none;
+    stroke: none;
+}
+
+
+/* The SVG path that displays the timer's progress */
+
+.base-timer__path-elapsed {
+    stroke-width: 0.4375em;
+    stroke: grey;
+}
+
+.base-timer__label {
+    position: absolute;
+    /* Size should match the parent container */
+    height: 100%;
+    width: 100%;
+    /* Keep the label aligned to the top */
+    top: 0;
+    /* Create a flexible box that centers content vertically and horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Sort of an arbitrary number; adjust to your liking */
+    font-size: 48px;
+}
