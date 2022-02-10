@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "PomoDirect",
-	"webDir": "www",
-	"bundledWebRuntime": false
+    "appId": "localhost:8100",
+    "appName": "PomoDirect",
+    "webDir": "www",
+    "bundledWebRuntime": true
 }
