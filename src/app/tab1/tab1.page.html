@@ -62,12 +62,6 @@
                                     <ion-icon src="assets\icon\settings.svg"></ion-icon>
                                 </ion-fab-button>
                             </ion-fab>
-                            <!-- <ion-button expand="block" (click)="chronograph.startTimer()">Start</ion-button>
-                            <ion-button expand="block" (click)="chronograph.pauseTimer()">Pause</ion-button>
-                            <ion-button expand="block" (click)="chronograph.resumeTimer()">Resume</ion-button>
-                            <ion-button expand="block" (click)="chronograph.stopTimer()">Stop</ion-button>
-                            <ion-button expand="block" (click)="chronograph.resetTimer()">Reset</ion-button> -->
-                            <!-- (click)="setTimer(1800,'blue')" -->
                         </ion-card-content>
                     </ion-card>
                 </ion-row>
@@ -82,20 +76,8 @@
                 </ion-row>
             </ion-col>
             <ion-col>
-                <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-                        <ion-item *ngFor="let item of data">
-                            <!-- <ion-avatar item-start>
-                  <img src="{{item.avatar}}">
-                </ion-avatar> -->
-                            <!-- <ion-icon name="clock"></ion-icon> -->
-                            <ion-label>{{item.id}}</ion-label>
-                            <ion-text color="primary">
-                                {{item.name}}
-                            </ion-text>
-                        </ion-item>
-                    </ion-infinite-scroll-content>
-                </ion-infinite-scroll>
+                <app-table>
+                </app-table>
             </ion-col>
         </ion-row>
     </ion-grid>

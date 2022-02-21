@@ -9,6 +9,11 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { CountdownConfig, CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
 import { ChronographComponent } from '../chronograph/chronograph.component';
 import { PipesModule } from '../pipes.module';
+import { TableComponent } from '../table/table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function countdownConfigFactory(): CountdownConfig {
   return {};
@@ -21,9 +26,12 @@ export function countdownConfigFactory(): CountdownConfig {
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
     CountdownModule,
-    PipesModule
+    PipesModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [{ provide: CountdownGlobalConfig, useFactory: countdownConfigFactory }],
-  declarations: [Tab1Page, ChronographComponent]
+  declarations: [Tab1Page, ChronographComponent, TableComponent]
 })
 export class Tab1PageModule {}

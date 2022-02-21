@@ -1,0 +1,69 @@
+<ion-card class="full-card">
+    <ion-card-content>
+        <mat-table class="full-width-table" matSort aria-label="Elements">
+            <!-- Id Column -->
+            <ng-container matColumnDef="id">
+                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                <mat-cell class="short-field" *matCellDef="let row">
+                    {{row.id}}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="other">
+                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>other</mat-header-cell>
+                <mat-cell class="short-field" *matCellDef="let row">
+                    {{row.id}}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="one">
+                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>one</mat-header-cell>
+                <mat-cell class="short-field" *matCellDef="let row">
+                    {{row.id}}
+                </mat-cell>
+            </ng-container>
+
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <ion-item-sliding id="item100">
+                        <ion-item href="#">
+                            <ion-label>
+                                <h2>HubStruck Notifications</h2>
+                                <p>A new message in your network</p>
+                                <p>Oceanic Next has joined your network</p>
+                            </ion-label>
+                            <ion-note slot="end">
+                                10:45 AM
+                            </ion-note>
+                        </ion-item>
+
+                        <ion-item-options side="start">
+                            <ion-item-option>
+                                <!-- <ion-icon slot="icon-only" name="heart"></ion-icon> -->
+                                Delete
+                            </ion-item-option>
+                        </ion-item-options>
+
+                        <ion-item-options side="end">
+                            <ion-item-option color="danger">
+                                <ion-icon slot="icon-only" name="trash"></ion-icon>
+                            </ion-item-option>
+                            <ion-item-option>
+                                <ion-icon slot="icon-only" name="star"></ion-icon>
+                            </ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+
+            </mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator [length]="dataSource?.data?.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+        </mat-paginator>
+    </ion-card-content>
+</ion-card>

@@ -1,19 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { NgxElectronModule } from 'ngx-electron';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NgxElectronModule],
-  providers: [StatusBar,
-              SplashScreen,
-              { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    NgxElectronModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule
+  ],
+  providers: [],
   bootstrap: [AppComponent],
   exports: []})
 
