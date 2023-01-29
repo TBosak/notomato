@@ -6,6 +6,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
 import { BehaviorSubject, of } from 'rxjs';
+import { PersistenceService } from '../services/persistence.service';
+import { Task } from '../models/task';
 
 @Component({
   selector: 'app-chronograph',
@@ -32,7 +34,7 @@ export class ChronographComponent implements OnInit {
   });
   defaults: any = {};
 
-  constructor() {
+  constructor(public persistence: PersistenceService) {
   }
 
   ngOnInit(): void {
@@ -82,6 +84,9 @@ export class ChronographComponent implements OnInit {
     if (e.action === 'notify'){
       this.setRemainingPathColor(e.left/1000);
       this.pathRemaining = {'stroke-dasharray': `${this.calculateDashArray(e.left/1000)}`};
+    }
+    if (e.action === 'done'){
+      this.persistence.addUnfinishedTask({createdAt: new Date(Date.now()), timeSpent: this.startTime} as Task);
     }
   }
 

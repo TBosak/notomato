@@ -2,7 +2,7 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
@@ -13,7 +13,12 @@ import { TableComponent } from '../table/table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TaskFormComponent } from './task-form/task-form.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
 export function countdownConfigFactory(): CountdownConfig {
   return {};
@@ -29,9 +34,15 @@ export function countdownConfigFactory(): CountdownConfig {
     PipesModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: CountdownGlobalConfig, useFactory: countdownConfigFactory }],
-  declarations: [Tab1Page, ChronographComponent, TableComponent]
+  declarations: [Tab1Page, ChronographComponent, TableComponent, TaskFormComponent]
 })
 export class Tab1PageModule {}

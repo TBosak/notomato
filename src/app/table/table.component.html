@@ -9,13 +9,13 @@
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="other">
-                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>other</mat-header-cell>
+                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>Tag</mat-header-cell>
                 <mat-cell class="short-field" *matCellDef="let row">
                     {{row.id}}
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="one">
-                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>one</mat-header-cell>
+                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
                 <mat-cell class="short-field" *matCellDef="let row">
                     {{row.id}}
                 </mat-cell>
@@ -24,12 +24,12 @@
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Content</mat-header-cell>
                 <mat-cell *matCellDef="let row">
                     <ion-item-sliding id="item100">
                         <ion-item href="#">
                             <ion-label>
-                                <h2>HubStruck Notifications</h2>
+                                <h2> </h2>
                                 <p>A new message in your network</p>
                                 <p>Oceanic Next has joined your network</p>
                             </ion-label>

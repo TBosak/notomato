@@ -68,16 +68,16 @@
                 <ion-row>
                     <ion-card class="full-card">
                         <ion-card-content>
-                            <ion-item>
-
+                            <ion-item *ngFor="let task of unfinished">
+                                <app-task-form [task]="task"></app-task-form>
                             </ion-item>
                         </ion-card-content>
                     </ion-card>
                 </ion-row>
             </ion-col>
             <ion-col>
-                <app-table>
-                </app-table>
+                <!-- <app-table>
+                </app-table> -->
             </ion-col>
         </ion-row>
     </ion-grid>

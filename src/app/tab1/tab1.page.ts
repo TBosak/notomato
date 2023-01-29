@@ -4,6 +4,8 @@ import { CountdownComponent } from 'ngx-countdown';
 import { ChronographComponent } from '../chronograph/chronograph.component';
 import { NotificationService } from '../services/notification.service';
 import { BehaviorSubject } from 'rxjs';
+import { Task } from '../models/task';
+import { PersistenceService } from '../services/persistence.service';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -11,6 +13,9 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Tab1Page implements AfterViewInit {
+
+  finished: Task[] = [];
+  unfinished: Task[] = [];
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild('chronograph', { static: false }) chronograph: ChronographComponent;
   status: BehaviorSubject<string> = new BehaviorSubject('break');
@@ -18,13 +23,15 @@ export class Tab1Page implements AfterViewInit {
   pomodoro = 1800;
   short = 300;
   long = 900;
-  notificationService: NotificationService;
   data: {'id': number; 'name': string}[];
-  constructor(notificationService: NotificationService) {
-    this.notificationService = notificationService;
+  constructor(public notificationService: NotificationService, public persistence: PersistenceService) {
     this.data = Array(100).fill('').map((x, i) => ({id: i + 1, name: 'Item ' + (i + 1)}));
   }
 
+  ngOnInit(): void {
+   this.persistence.finishedTasks.subscribe( tasks => this.finished = tasks );
+    this.persistence.unfinishedTasks.subscribe( tasks => this.unfinished = tasks );
+  }
 
    ngAfterViewInit(): void {
     this.cd = this.chronograph.countdown;
