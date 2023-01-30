@@ -9,16 +9,17 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { CountdownConfig, CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
 import { ChronographComponent } from '../chronograph/chronograph.component';
 import { PipesModule } from '../pipes.module';
-import { TableComponent } from '../table/table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { TaskFormComponent } from './task-form/task-form.component';
+import { TaskFormComponent } from '../task-form/task-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
+import { TableComponent } from '../table/table.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 export function countdownConfigFactory(): CountdownConfig {
   return {};
@@ -40,7 +41,8 @@ export function countdownConfigFactory(): CountdownConfig {
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableExporterModule
   ],
   providers: [{ provide: CountdownGlobalConfig, useFactory: countdownConfigFactory }],
   declarations: [Tab1Page, ChronographComponent, TableComponent, TaskFormComponent]

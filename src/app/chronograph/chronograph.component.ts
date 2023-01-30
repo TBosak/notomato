@@ -28,7 +28,7 @@ export class ChronographComponent implements OnInit {
     };
   remainingPathColor = '';
   countDownConfig: BehaviorSubject<CountdownConfig> = new BehaviorSubject<CountdownConfig>({
-    leftTime: 30,
+    leftTime: 0,
     format: 'mm:ss',
     notify: this.notifications
   });
@@ -54,22 +54,27 @@ export class ChronographComponent implements OnInit {
 
   startTimer() {
     this.countdown.begin();
+    this.persistence.timerActive.next(true);
   }
 
   stopTimer() {
     this.countdown.stop();
+    this.persistence.timerActive.next(false);
   }
 
   resetTimer() {
     this.countdown.restart();
+    this.persistence.timerActive.next(true);
   }
 
   pauseTimer() {
     this.countdown.pause();
+    this.persistence.timerActive.next(false);
   }
 
   resumeTimer() {
     this.countdown.resume();
+    this.persistence.timerActive.next(false);
   }
 
   setTime(time) {
@@ -80,13 +85,19 @@ export class ChronographComponent implements OnInit {
   }
 
   handleEvent(e: CountdownEvent) {
-    if (e.action === 'start') {this.remainingPathColor = this.colorCodes.base.color;}
+    if (e.action === 'start') {
+      this.remainingPathColor = this.colorCodes.base.color;
+      this.persistence.timerActive.next(true);
+    }
     if (e.action === 'notify'){
       this.setRemainingPathColor(e.left/1000);
       this.pathRemaining = {'stroke-dasharray': `${this.calculateDashArray(e.left/1000)}`};
     }
     if (e.action === 'done'){
-      this.persistence.addUnfinishedTask({createdAt: new Date(Date.now()), timeSpent: this.startTime} as Task);
+      if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
+        this.persistence.addUnfinishedTask({id: Date.now(), createdAt: new Date(Date.now()), duration: this.startTime} as Task);
+      }
+      this.persistence.timerActive.next(false);
     }
   }
 

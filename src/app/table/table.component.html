@@ -1,69 +1,63 @@
-<ion-card class="full-card">
-    <ion-card-content>
-        <mat-table class="full-width-table" matSort aria-label="Elements">
-            <!-- Id Column -->
-            <ng-container matColumnDef="id">
-                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-                <mat-cell class="short-field" *matCellDef="let row">
-                    {{row.id}}
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="other">
-                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>Tag</mat-header-cell>
-                <mat-cell class="short-field" *matCellDef="let row">
-                    {{row.id}}
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="one">
-                <mat-header-cell class="short-field" *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
-                <mat-cell class="short-field" *matCellDef="let row">
-                    {{row.id}}
-                </mat-cell>
-            </ng-container>
+<ion-card>
+  <ion-card-content>
+  <mat-table matTableExporter [dataSource]="data" #exporter="matTableExporter" class="mat-elevation-z0" [hiddenColumns]="[5]">
 
+  <ng-container matColumnDef="tag">
+    <mat-header-cell *matHeaderCellDef> Tag   </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.tag}}  </mat-cell>
+  </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Content</mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                    <ion-item-sliding id="item100">
-                        <ion-item href="#">
-                            <ion-label>
-                                <h2> </h2>
-                                <p>A new message in your network</p>
-                                <p>Oceanic Next has joined your network</p>
-                            </ion-label>
-                            <ion-note slot="end">
-                                10:45 AM
-                            </ion-note>
-                        </ion-item>
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef> Category  </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.category}}   </mat-cell>
+  </ng-container>
 
-                        <ion-item-options side="start">
-                            <ion-item-option>
-                                <!-- <ion-icon slot="icon-only" name="heart"></ion-icon> -->
-                                Delete
-                            </ion-item-option>
-                        </ion-item-options>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.description}}  </mat-cell>
+  </ng-container>
 
-                        <ion-item-options side="end">
-                            <ion-item-option color="danger">
-                                <ion-icon slot="icon-only" name="trash"></ion-icon>
-                            </ion-item-option>
-                            <ion-item-option>
-                                <ion-icon slot="icon-only" name="star"></ion-icon>
-                            </ion-item-option>
-                        </ion-item-options>
-                    </ion-item-sliding>
-                </mat-cell>
-            </ng-container>
+  <ng-container matColumnDef="duration">
+    <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.duration/60}} minutes </mat-cell>
+  </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;">
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.createdAt.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}} </mat-cell>
+  </ng-container>
 
-            </mat-row>
-        </mat-table>
+  <ng-container matColumnDef="settings">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let task">
+    <button mat-button (click)="editTask(task)">Edit</button>
+    <button mat-button (click)="deleteTask(task)">Delete</button>
+    </mat-cell>
+  </ng-container>
 
-        <mat-paginator #paginator [length]="dataSource?.data?.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
-        </mat-paginator>
-    </ion-card-content>
+  <mat-header-row *matHeaderRowDef="displayedColumns">  </mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;">  </mat-row>
+  <mat-row id="empty" class="mat-row" *matNoDataRow>
+    <mat-cell class="mat-cell" [attr.colspan]="displayedColumns.length">
+      No tasks found
+    </mat-cell>
+  </mat-row>
+</mat-table>
+</ion-card-content>
 </ion-card>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+<button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'pomo-direct', sheet: 'tasks', Props: {Author: 'pomo-direct'}})">Excel</button>
+    </ion-col>
+    <ion-col>
+<button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
+</ion-col>
+<ion-col>
+<button mat-raised-button (click)="exporter.exportTable('json')">Json</button>
+</ion-col>
+<ion-col>
+<button mat-raised-button (click)="exporter.exportTable('txt')">Txt</button>
+</ion-col>
+  </ion-row>
+</ion-grid>

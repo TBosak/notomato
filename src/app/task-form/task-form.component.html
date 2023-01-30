@@ -1,0 +1,41 @@
+<form [formGroup]="taskForm" novalidate (ngSubmit)="onSubmit()">
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <b>Created:</b> {{this.task.createdAt}}
+          </ion-col>
+          <ion-col>
+            <b>Duration:</b> {{this.task.duration/60}} minutes
+          </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <mat-form-field style="width:100%">
+                    <input matInput placeholder="Tag" formControlName="tag" [value]="task.tag">
+                </mat-form-field>
+            </ion-col>
+            <ion-col>
+                <mat-form-field style="width:100%">
+                    <input matInput placeholder="Category" formControlName="category" [value]="task.category">
+                </mat-form-field>
+            </ion-col>
+            </ion-row>
+            <ion-row>
+            <ion-col>
+                <mat-form-field style="width:100%;">
+                    <textarea matInput placeholder="Content" formControlName="description" [value]="task.description"></textarea>
+                </mat-form-field>
+            </ion-col>
+          </ion-row>
+            <ion-row>
+            <ion-col>
+                <button mat-raised-button type="submit" style="height:100%;width:50%;">
+                    Submit
+                </button>
+                <button mat-raised-button (click)="removeTask()" style="height:100%;width:50%;">
+                  Delete
+              </button>
+            </ion-col>
+            </ion-row>
+    </ion-grid>
+</form>

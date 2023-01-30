@@ -8,6 +8,6 @@ export class Task{
         public status?: string,
         public createdAt?: Date,
         public updatedAt?: Date,
-        public timeSpent?: number,
+        public duration?: number,
     ){}
 }

@@ -23,8 +23,11 @@
                                     <ion-icon src="assets\icon\clock.svg"></ion-icon>
                                 </ion-fab-button>
                                 <ion-fab-list side="top">
-                                    <ion-fab-button (click)="chronograph.startTimer()">
+                                    <ion-fab-button *ngIf="!timerActive" (click)="chronograph.resumeTimer()">
                                         <ion-icon name="play-circle-outline"></ion-icon>
+                                    </ion-fab-button>
+                                    <ion-fab-button *ngIf="timerActive" (click)="chronograph.pauseTimer()">
+                                        <ion-icon name="pause-circle-outline"></ion-icon>
                                     </ion-fab-button>
                                 </ion-fab-list>
                                 <ion-fab-list side="end">
@@ -40,22 +43,46 @@
                             </ion-fab>
                             <ion-fab vertical="top" horizontal="start" slot="fixed">
                                 <ion-fab-button>
-                                    <ion-icon src="assets\icon\coffee.svg"></ion-icon>
+                                    <ion-icon src="assets\icon\tomato.svg"></ion-icon>
                                 </ion-fab-button>
                                 <ion-fab-list side="top">
-                                    <ion-fab-button (click)="setTimer(300,'blue')">
+                                    <ion-fab-button >
                                         <ion-label>
-                                            Short
+                                            Break
                                         </ion-label>
                                     </ion-fab-button>
+                                    <ion-fab-list side="top">
+                                        <ion-fab-button (click)="setTimer(30,true)">
+                                            <ion-label>
+                                                Short
+                                            </ion-label>
+                                        </ion-fab-button>
+                                        <ion-fab-button (click)="setTimer(900,true)">
+                                            <ion-label>
+                                                Long
+                                            </ion-label>
+                                        </ion-fab-button>
+                                    </ion-fab-list>
                                 </ion-fab-list>
                                 <ion-fab-list side="end">
-                                    <ion-fab-button (click)="setTimer(900,'blue')">
+                                    <ion-fab-button>
                                         <ion-label>
-                                            Long
+                                            Pomo
                                         </ion-label>
                                     </ion-fab-button>
-                                </ion-fab-list>
+                                 <ion-fab-list side="end">
+                                        <ion-fab-button (click)="setTimer(30,false)">
+                                            <ion-label>
+                                                Short
+                                            </ion-label>
+                                        </ion-fab-button>
+                                        <ion-fab-button (click)="setTimer(1800,false)">
+                                            <ion-label>
+                                                Long
+                                            </ion-label>
+                                        </ion-fab-button>
+                                    </ion-fab-list>
+                                 </ion-fab-list>
                             </ion-fab>
                             <ion-fab vertical="top" horizontal="end" slot="fixed">
                                 <ion-fab-button>
@@ -76,8 +103,8 @@
                 </ion-row>
             </ion-col>
             <ion-col>
-                <!-- <app-table>
-                </app-table> -->
+                <app-table [data]="finished">
+                </app-table>
             </ion-col>
         </ion-row>
     </ion-grid>

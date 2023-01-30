@@ -1,8 +1,5 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { TableDataSource } from './table-datasource';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { PersistenceService } from '../services/persistence.service';
 import { Task } from '../models/task';
 
 @Component({
@@ -10,23 +7,21 @@ import { Task } from '../models/task';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<Task>;
-  dataSource: TableDataSource;
+export class TableComponent implements OnInit {
+  @Input() data: Task[] = [];
+  displayedColumns: string[] = ['tag', 'category', 'description', 'duration', 'date', 'settings'];
+  constructor(public persistence: PersistenceService) { }
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'other','one','name'];
-
-  constructor() {
-    this.dataSource = new TableDataSource();
-    this.dataSource.data.push
+  ngOnInit() {
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  editTask(task: Task): void {
+    this.persistence.addUnfinishedTask(task);
+    this.persistence.removeFinishedTask(task);
   }
+
+  deleteTask(task: Task): void {
+    this.persistence.removeFinishedTask(task);
+  }
+
 }

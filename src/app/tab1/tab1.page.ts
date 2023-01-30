@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild, AfterViewInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { CountdownComponent } from 'ngx-countdown';
 import { ChronographComponent } from '../chronograph/chronograph.component';
@@ -12,12 +12,12 @@ import { PersistenceService } from '../services/persistence.service';
   styleUrls: ['tab1.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Tab1Page implements AfterViewInit {
-
-  finished: Task[] = [];
-  unfinished: Task[] = [];
+export class Tab1Page implements AfterViewInit, OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild('chronograph', { static: false }) chronograph: ChronographComponent;
+  finished: Task[] = [];
+  unfinished: Task[] = [];
+  timerActive = false;
   status: BehaviorSubject<string> = new BehaviorSubject('break');
   cd: CountdownComponent;
   pomodoro = 1800;
@@ -30,7 +30,8 @@ export class Tab1Page implements AfterViewInit {
 
   ngOnInit(): void {
    this.persistence.finishedTasks.subscribe( tasks => this.finished = tasks );
-    this.persistence.unfinishedTasks.subscribe( tasks => this.unfinished = tasks );
+   this.persistence.unfinishedTasks.subscribe( tasks => this.unfinished = tasks );
+   this.persistence.timerActive.subscribe( active => this.timerActive = active );
   }
 
    ngAfterViewInit(): void {
@@ -47,8 +48,9 @@ export class Tab1Page implements AfterViewInit {
     }, 500);
   }
 
-  setTimer(time: number, color: string){
+  setTimer(time: number, brk: boolean = false){
     this.chronograph.setTime(time);
+    this.persistence.breakTimer.next(brk);
     this.cd.begin();
   }
 
