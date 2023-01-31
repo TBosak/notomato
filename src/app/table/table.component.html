@@ -1,63 +1,59 @@
 <ion-card>
-  <ion-card-content>
-  <mat-table matTableExporter [dataSource]="data" #exporter="matTableExporter" class="mat-elevation-z0" [hiddenColumns]="[5]">
+    <ion-card-content>
+        <mat-table matTableExporter [dataSource]="data" #exporter="matTableExporter" class="mat-elevation-z0" [hiddenColumns]="[5]">
 
-  <ng-container matColumnDef="tag">
-    <mat-header-cell *matHeaderCellDef> Tag   </mat-header-cell>
-    <mat-cell *matCellDef="let task"> {{task.tag}}  </mat-cell>
-  </ng-container>
+            <ng-container matColumnDef="tag">
+                <mat-header-cell *matHeaderCellDef> Tag </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{task.tag}} </mat-cell>
+            </ng-container>
 
-  <ng-container matColumnDef="category">
-    <mat-header-cell *matHeaderCellDef> Category  </mat-header-cell>
-    <mat-cell *matCellDef="let task"> {{task.category}}   </mat-cell>
-  </ng-container>
+            <ng-container matColumnDef="category">
+                <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{task.category}} </mat-cell>
+            </ng-container>
 
-  <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-    <mat-cell *matCellDef="let task"> {{task.description}}  </mat-cell>
-  </ng-container>
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+            </ng-container>
 
-  <ng-container matColumnDef="duration">
-    <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
-    <mat-cell *matCellDef="let task"> {{task.duration/60}} minutes </mat-cell>
-  </ng-container>
+            <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{task.duration/60}} minutes </mat-cell>
+            </ng-container>
 
-  <ng-container matColumnDef="date">
-    <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
-    <mat-cell *matCellDef="let task"> {{task.createdAt.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}} </mat-cell>
-  </ng-container>
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{task.createdAt.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}} </mat-cell>
+            </ng-container>
 
-  <ng-container matColumnDef="settings">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let task">
-    <button mat-button (click)="editTask(task)">Edit</button>
-    <button mat-button (click)="deleteTask(task)">Delete</button>
-    </mat-cell>
-  </ng-container>
+            <ng-container matColumnDef="settings">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let task">
+                    <button mat-button (click)="editTask(task)">Edit</button>
+                    <button mat-button (click)="deleteTask(task)">Delete</button>
+                </mat-cell>
+            </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns">  </mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;">  </mat-row>
-  <mat-row id="empty" class="mat-row" *matNoDataRow>
-    <mat-cell class="mat-cell" [attr.colspan]="displayedColumns.length">
-      No tasks found
-    </mat-cell>
-  </mat-row>
-</mat-table>
-</ion-card-content>
+            <mat-header-row *matHeaderRowDef="displayedColumns"> </mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+            <div id="empty" *matNoDataRow>No tasks found</div>
+        </mat-table>
+    </ion-card-content>
 </ion-card>
 <ion-grid>
-  <ion-row>
-    <ion-col>
-<button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'pomo-direct', sheet: 'tasks', Props: {Author: 'pomo-direct'}})">Excel</button>
-    </ion-col>
-    <ion-col>
-<button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
-</ion-col>
-<ion-col>
-<button mat-raised-button (click)="exporter.exportTable('json')">Json</button>
-</ion-col>
-<ion-col>
-<button mat-raised-button (click)="exporter.exportTable('txt')">Txt</button>
-</ion-col>
-  </ion-row>
+    <ion-row>
+        <ion-col>
+            <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'pomo-direct', sheet: 'tasks', Props: {Author: 'pomo-direct'}})">Excel</button>
+        </ion-col>
+        <ion-col>
+            <button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
+        </ion-col>
+        <ion-col>
+            <button mat-raised-button (click)="exporter.exportTable('json')">Json</button>
+        </ion-col>
+        <ion-col>
+            <button mat-raised-button (click)="exporter.exportTable('txt')">Txt</button>
+        </ion-col>
+    </ion-row>
 </ion-grid>

@@ -9,6 +9,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { PersistenceService } from '../services/persistence.service';
 import { Task } from '../models/task';
 import { DatabaseService } from '../services/database.service';
+import { config } from 'process';
 
 @Component({
   selector: 'app-chronograph',
@@ -95,11 +96,18 @@ export class ChronographComponent implements OnInit {
       this.setRemainingPathColor(e.left/1000);
       this.pathRemaining = {'stroke-dasharray': `${this.calculateDashArray(e.left/1000)}`};
     }
-    if (e.action === 'done' || e.action === 'stop'){
+    if (e.action === 'done'){
       if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
         this.timesUp.play();
         // this.persistence.addUnfinishedTask({id: Date.now(), createdAt: new Date(Date.now()), duration: this.startTime} as Task);
         this.db.table('unfinishedTasks').add({createdAt: new Date(Date.now()), duration: this.startTime} as Task);
+      }
+      this.persistence.timerActive.next(false);
+    }
+    if(e.action === 'stop'){
+      if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
+        this.timesUp.play();
+        this.db.table('unfinishedTasks').add({createdAt: new Date(Date.now()), duration: this.startTime - e.left/1000} as Task);
       }
       this.persistence.timerActive.next(false);
     }
