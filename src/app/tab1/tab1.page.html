@@ -93,7 +93,7 @@
                     </ion-card>
                 </ion-row>
                 <ion-row>
-                    <ion-card class="full-card">
+                    <ion-card [hidden]="unfinishedHidden | async" class="full-card">
                         <ion-card-content>
                             <ion-item *ngFor="let task of unfinished$ | async">
                                 <app-task-form [task]="task"></app-task-form>

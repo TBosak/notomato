@@ -17,12 +17,11 @@ import { DatabaseService } from '../services/database.service';
 export class Tab1Page implements AfterViewInit, OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild('chronograph', { static: false }) chronograph: ChronographComponent;
-  finished: Task[] = [];
-  unfinished: Task[] = [];
   finished$: any;
   unfinished$: any;
   timerActive = false;
   cd: CountdownComponent;
+  unfinishedHidden = new BehaviorSubject<boolean>(true);
   pomodoro = 1800;
   short = 300;
   long = 900;
@@ -37,7 +36,10 @@ export class Tab1Page implements AfterViewInit, OnInit {
    this.persistence.timerActive.subscribe( active => this.timerActive = active );
    this.finished$ = liveQuery(() => this.db.table('finishedTasks').toArray());
    this.unfinished$ = liveQuery(() => this.db.table('unfinishedTasks').toArray());
+   this.unfinished$.subscribe( tasks => this.unfinishedHidden.next(tasks.length === 0) );
   }
+
+
 
    ngAfterViewInit(): void {
     this.cd = this.chronograph.countdown;
