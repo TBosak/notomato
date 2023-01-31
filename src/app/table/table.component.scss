@@ -1,6 +1,7 @@
 table{
   height: 100%;
   width: 100%;
+  table-layout: fixed;
 }
 
 #empty{
@@ -8,12 +9,20 @@ table{
 }
 
 ion-card {
-  height: 100%;
+  height: 90%;
   width: 100%;
   border-radius: var(--radius-4);
   box-shadow: var(--shadow-6);
+  overflow: auto;
 }
 
 button{
   width: 100%;
+}
+
+th, td {
+  overflow: hidden;
+  width:auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -1,12 +1,23 @@
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { ReportComponent } from '../report/report.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { CountdownModule } from 'ngx-countdown';
+import { PipesModule } from '../pipes.module';
+import { Tab1PageRoutingModule } from '../tab1/tab1-routing.module';
 
 @NgModule({
   imports: [
@@ -14,8 +25,20 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    CountdownModule,
+    PipesModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatTableExporterModule,
+    Tab2PageRoutingModule,
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page, ReportComponent]
 })
 export class Tab2PageModule {}
