@@ -8,6 +8,7 @@ import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdo
 import { BehaviorSubject, of } from 'rxjs';
 import { PersistenceService } from '../services/persistence.service';
 import { Task } from '../models/task';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-chronograph',
@@ -34,7 +35,7 @@ export class ChronographComponent implements OnInit {
     notify: this.notifications
   });
 
-  constructor(public persistence: PersistenceService) {
+  constructor(public persistence: PersistenceService, public db: DatabaseService) {
   }
 
   ngOnInit(): void {
@@ -97,7 +98,8 @@ export class ChronographComponent implements OnInit {
     if (e.action === 'done' || e.action === 'stop'){
       if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
         this.timesUp.play();
-        this.persistence.addUnfinishedTask({id: Date.now(), createdAt: new Date(Date.now()), duration: this.startTime} as Task);
+        // this.persistence.addUnfinishedTask({id: Date.now(), createdAt: new Date(Date.now()), duration: this.startTime} as Task);
+        this.db.table('unfinishedTasks').add({createdAt: new Date(Date.now()), duration: this.startTime} as Task);
       }
       this.persistence.timerActive.next(false);
     }

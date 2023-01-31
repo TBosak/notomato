@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from '../models/task';
 import { PersistenceService } from 'src/app/services/persistence.service';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-task-form',
@@ -12,7 +13,7 @@ export class TaskFormComponent implements OnInit {
   @Input() task: Task = new Task();
   taskForm: FormGroup;
 
-  constructor(public fb: FormBuilder, public persistence: PersistenceService) {
+  constructor(public fb: FormBuilder, public persistence: PersistenceService, public db: DatabaseService) {
     this.taskForm = this.fb.group(this.task);
   }
 
@@ -22,16 +23,16 @@ export class TaskFormComponent implements OnInit {
     };
   }
 
-  onSubmit(): void {
+  submitTask(): void {
     this.task.tag = this.taskForm.value.tag;
     this.task.description = this.taskForm.value.description;
     this.task.category = this.taskForm.value.category;
-    this.persistence.addFinishedTask(this.task);
-    this.persistence.removeUnfinishedTask(this.task);
+    this.db.table('finishedTasks').add(this.task);
+    this.db.table('unfinishedTasks').delete(this.task.id);
   }
 
   removeTask(): void {
-    this.persistence.removeUnfinishedTask(this.task);
+    this.db.table('unfinishedTasks').delete(this.task.id);
   }
 
 }

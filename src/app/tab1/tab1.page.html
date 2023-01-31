@@ -46,7 +46,7 @@
                                     <ion-icon src="assets\icon\tomato.svg"></ion-icon>
                                 </ion-fab-button>
                                 <ion-fab-list side="top">
-                                    <ion-fab-button >
+                                    <ion-fab-button>
                                         <ion-label>
                                             Break
                                         </ion-label>
@@ -70,8 +70,8 @@
                                             Pomo
                                         </ion-label>
                                     </ion-fab-button>
-                                 <ion-fab-list side="end">
-                                        <ion-fab-button (click)="setTimer(900,false)">
+                                    <ion-fab-list side="end">
+                                        <ion-fab-button (click)="setTimer(30,false)">
                                             <ion-label>
                                                 Short
                                             </ion-label>
@@ -82,7 +82,7 @@
                                             </ion-label>
                                         </ion-fab-button>
                                     </ion-fab-list>
-                                 </ion-fab-list>
+                                </ion-fab-list>
                             </ion-fab>
                             <ion-fab vertical="top" horizontal="end" slot="fixed">
                                 <ion-fab-button>
@@ -95,7 +95,7 @@
                 <ion-row>
                     <ion-card class="full-card">
                         <ion-card-content>
-                            <ion-item *ngFor="let task of unfinished">
+                            <ion-item *ngFor="let task of unfinished$ | async">
                                 <app-task-form [task]="task"></app-task-form>
                             </ion-item>
                         </ion-card-content>
@@ -103,7 +103,7 @@
                 </ion-row>
             </ion-col>
             <ion-col>
-                <app-table [data]="finished">
+                <app-table [data]="finished$ | async">
                 </app-table>
             </ion-col>
         </ion-row>
