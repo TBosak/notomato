@@ -18,6 +18,7 @@ import { Task } from '../models/task';
 export class ChronographComponent implements OnInit {
   @ViewChild('cd', { static: false }) countdown: CountdownComponent;
   startTime: number;
+  timesUp = new Audio('assets/audio/ding.wav');
   secondsLeft: BehaviorSubject<number> = new BehaviorSubject(0);
   notifications: number[] = [...Array(3600).keys()].splice(1,3600);
   pathRemaining = {};
@@ -32,12 +33,12 @@ export class ChronographComponent implements OnInit {
     format: 'mm:ss',
     notify: this.notifications
   });
-  defaults: any = {};
 
   constructor(public persistence: PersistenceService) {
   }
 
   ngOnInit(): void {
+
     this.countDownConfig.subscribe(config => {
       this.startTime = config.leftTime;
     });
@@ -93,8 +94,9 @@ export class ChronographComponent implements OnInit {
       this.setRemainingPathColor(e.left/1000);
       this.pathRemaining = {'stroke-dasharray': `${this.calculateDashArray(e.left/1000)}`};
     }
-    if (e.action === 'done'){
+    if (e.action === 'done' || e.action === 'stop'){
       if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
+        this.timesUp.play();
         this.persistence.addUnfinishedTask({id: Date.now(), createdAt: new Date(Date.now()), duration: this.startTime} as Task);
       }
       this.persistence.timerActive.next(false);
