@@ -1,4 +1,4 @@
-# pomo-direct
+# Pomodirect
 Pomodoro notes app built in Ionic &amp; Angular frameworks, using Dexie.js to persist tasks/notes in IndexedDB.
 
 The user is able to run a timer for [pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique) sessions, which creates a new task when completed or stopped.
