@@ -10,7 +10,8 @@ export class DatabaseService extends Dexie {
     super('DexieDB');
     this.version(1).stores({
       finishedTasks: '++id, category, tag, description, status, createdAt, updatedAt, duration',
-      unfinishedTasks: '++id, category, tag, description, status, createdAt, updatedAt, duration'
+      unfinishedTasks: '++id, category, tag, description, status, createdAt, updatedAt, duration',
+      settings: 'shortPomo, longPomo, shortBreak, longBreak'
   });
 
   this.open()

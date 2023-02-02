@@ -1,1 +1,58 @@
-<p>report works!</p>
+<ion-card>
+  <form [formGroup]="filterForm" novalidate>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+              <b>Tags:</b> {{this.filters.tags}}
+          </ion-col>
+            <ion-col>
+              <b>Categories:</b> {{this.filters.categories}}
+          </ion-col>
+          <ion-col>
+            <b>Date Range:</b> {{this.filters.startDate?.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}} - {{this.filters.endDate?.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}}
+        </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                    <mat-form-field style="width:100%;" appearance="fill">
+                      <mat-label>Tags</mat-label>
+                      <mat-select formControlName="tags" multiple>
+                        <mat-option *ngFor="let tag of tagOpts" [value]="tag">{{tag}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+            </ion-col>
+            <ion-col>
+              <mat-form-field style="width:100%;" appearance="fill">
+                <mat-label>Categories</mat-label>
+                <mat-select formControlName="categories" multiple>
+                  <mat-option *ngFor="let cat of catOpts" [value]="cat">{{cat}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-col>
+        <ion-col>
+          <mat-form-field style="width:100%;" appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate formControlName="startDate" placeholder="Start date">
+              <input matEndDate formControlName="endDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+        <ion-row>
+            <ion-col>
+                <button (click)="submitFilters()" mat-raised-button style="height:100%;width:50%;">
+                    Submit
+                </button>
+                <button (click)="clearFilters()" mat-raised-button style="height:100%;width:50%;">
+                  Clear
+              </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</form>
+</ion-card>
+<app-table [data]="filteredData" [settings]="false"></app-table>

@@ -17,7 +17,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { CountdownModule } from 'ngx-countdown';
 import { PipesModule } from '../pipes.module';
-import { Tab1PageRoutingModule } from '../tab1/tab1-routing.module';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { TableComponent } from '../table/table.component';
 
 @NgModule({
   imports: [
@@ -38,7 +40,9 @@ import { Tab1PageRoutingModule } from '../tab1/tab1-routing.module';
     ReactiveFormsModule,
     MatTableExporterModule,
     Tab2PageRoutingModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  declarations: [Tab2Page, ReportComponent]
+  declarations: [Tab2Page, ReportComponent, TableComponent]
 })
 export class Tab2PageModule {}

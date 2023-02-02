@@ -27,7 +27,7 @@
                 <mat-cell *matCellDef="let task"> {{task.createdAt.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="settings">
+            <ng-container *ngIf="settings" matColumnDef="settings">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let task">
                     <button mat-button (click)="editTask(task)">Edit</button>
@@ -47,13 +47,13 @@
             <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'pomo-direct', sheet: 'tasks', Props: {Author: 'pomo-direct'}})">Excel</button>
         </ion-col>
         <ion-col>
-            <button mat-raised-button (click)="exporter.exportTable('csv')">Csv</button>
+            <button mat-raised-button (click)="exporter.exportTable('csv', {fileName:'pomo-direct'})">Csv</button>
         </ion-col>
         <ion-col>
-            <button mat-raised-button (click)="exporter.exportTable('json')">Json</button>
+            <button mat-raised-button (click)="exporter.exportTable('json', {fileName:'pomo-direct'})">Json</button>
         </ion-col>
         <ion-col>
-            <button mat-raised-button (click)="exporter.exportTable('txt')">Txt</button>
+            <button mat-raised-button (click)="exporter.exportTable('txt', {fileName:'pomo-direct'})">Txt</button>
         </ion-col>
     </ion-row>
 </ion-grid>

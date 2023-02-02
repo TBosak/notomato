@@ -9,9 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
-  declarations: [			AppComponent,
-      SettingsComponent
-   ],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
