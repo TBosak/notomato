@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   constructor(public persistence: PersistenceService, public db: DatabaseService) {}
 
   ngOnInit() {
+    this.db.table('settings').add(
+      new Settings(15,30,5,15,true,'assets/audio/ding.wav'));
     this.settingsObservable$ = liveQuery(() => this.db.table('settings').toArray());
     this.settingsObservable$.subscribe(data => {
       if(Object.values(data[0]).every(value => value !== undefined && value !== null && value !== 0)){
@@ -24,10 +26,6 @@ export class AppComponent implements OnInit {
     this.db.table('settings').toArray().then(data => {
       if(Object.values(data[0]).every(value => value !== undefined && value !== null && value !== 0)){
         this.persistence.settings = data[0];
-      }
-      else{
-        this.db.table('settings').add(
-          new Settings(15,30,5,15,true,'assets/audio/ding.wav'));
       }
     });
   }
