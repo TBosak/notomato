@@ -52,12 +52,12 @@
                                         </ion-label>
                                     </ion-fab-button>
                                     <ion-fab-list side="top">
-                                        <ion-fab-button (click)="setTimer(300,true)">
+                                        <ion-fab-button (click)="setTimer(persistence.settings.shortBreak * 60,true)">
                                             <ion-label>
                                                 Short
                                             </ion-label>
                                         </ion-fab-button>
-                                        <ion-fab-button (click)="setTimer(900,true)">
+                                        <ion-fab-button (click)="setTimer(persistence.settings.longBreak * 60,true)">
                                             <ion-label>
                                                 Long
                                             </ion-label>
@@ -71,12 +71,12 @@
                                         </ion-label>
                                     </ion-fab-button>
                                     <ion-fab-list side="end">
-                                        <ion-fab-button (click)="setTimer(900,false)">
+                                        <ion-fab-button (click)="setTimer(persistence.settings.shortPomo * 60,false)">
                                             <ion-label>
                                                 Short
                                             </ion-label>
                                         </ion-fab-button>
-                                        <ion-fab-button (click)="setTimer(1800,false)">
+                                        <ion-fab-button (click)="setTimer(persistence.settings.longPomo * 60,false)">
                                             <ion-label>
                                                 Long
                                             </ion-label>

@@ -44,12 +44,14 @@
       </ion-row>
         <ion-row>
             <ion-col>
-                <button (click)="submitFilters()" mat-raised-button style="height:100%;width:50%;">
+                <ion-button color="dark" expand="full" (click)="submitFilters()">
                     Submit
-                </button>
-                <button (click)="clearFilters()" mat-raised-button style="height:100%;width:50%;">
-                  Clear
-              </button>
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button color="dark" expand="full" (click)="clearFilters()">
+                    Clear
+                </ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

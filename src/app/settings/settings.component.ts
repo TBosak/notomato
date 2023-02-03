@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Settings } from '../models/settings';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DatabaseService } from '../services/database.service';
@@ -21,12 +21,16 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.settingsObservable$ = liveQuery(() => this.db.table('finishedTasks').toArray());
+    this.settingsObservable$ = liveQuery(() => this.db.table('settings').toArray());
     this.settingsObservable$.subscribe(data => {
-      if(data.length > 0){
-        this.settingsForm.patchValue(this.settings);
+      if(data.length > 0 && data[0] !== this.settingsForm.value){
+        this.settingsForm.patchValue(data[0]);
       }
     });
   }
 
+  saveSettings(): void {
+      this.db.table('settings').clear();
+      this.db.table('settings').add(this.settingsForm.value);
+  }
 }
