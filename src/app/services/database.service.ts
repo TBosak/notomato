@@ -7,7 +7,7 @@ import Dexie from 'dexie';
 export class DatabaseService extends Dexie {
 
   constructor() {
-    super('DexieDB');
+    super('Pomodirect');
     this.version(1).stores({
       finishedTasks: '++id, category, tag, description, status, createdAt, updatedAt, duration',
       unfinishedTasks: '++id, category, tag, description, status, createdAt, updatedAt, duration',
