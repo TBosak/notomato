@@ -1,7 +1,7 @@
 {
-  "name": "PomoDirect",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
+    "name": "Notomato",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "angular"
 }

@@ -1,6 +1,6 @@
 {
     "appId": "localhost:8100",
-    "appName": "PomoDirect",
+    "appName": "Notomato",
     "webDir": "www",
     "bundledWebRuntime": true
 }
