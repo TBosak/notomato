@@ -44,16 +44,16 @@
 <ion-grid>
     <ion-row>
         <ion-col>
-            <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'notomato', sheet: 'tasks', Props: {Author: 'notomato'}})">Excel</button>
+            <ion-button color="dark" expand="block" (click)="exporter.exportTable('xlsx', {fileName:'notomato', sheet: 'tasks', Props: {Author: 'notomato'}})">Excel</ion-button>
         </ion-col>
         <ion-col>
-            <button mat-raised-button (click)="exporter.exportTable('csv', {fileName:'notomato'})">Csv</button>
+            <ion-button color="dark" expand="block" (click)="exporter.exportTable('csv', {fileName:'notomato'})">Csv</ion-button>
         </ion-col>
         <ion-col>
-            <button mat-raised-button (click)="exporter.exportTable('json', {fileName:'notomato'})">Json</button>
+            <ion-button color="dark" expand="block" (click)="exporter.exportTable('json', {fileName:'notomato'})">Json</ion-button>
         </ion-col>
         <ion-col>
-            <button mat-raised-button (click)="exporter.exportTable('txt', {fileName:'notomato'})">Txt</button>
+            <ion-button color="dark" expand="block" (click)="exporter.exportTable('txt', {fileName:'notomato'})">Txt</ion-button>
         </ion-col>
     </ion-row>
 </ion-grid>

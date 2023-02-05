@@ -29,12 +29,14 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <button mat-raised-button (click)="submitTask()" style="height:100%;width:50%;">
+                <ion-button expand="block" color="dark" (click)="submitTask()">
                     Submit
-                </button>
-                <button mat-raised-button (click)="removeTask()" style="height:100%;width:50%;">
-                  Delete
-              </button>
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button expand="block" color="dark" (click)="removeTask()">
+                    Delete
+                </ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
