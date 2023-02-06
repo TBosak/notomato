@@ -10,6 +10,7 @@ import { PersistenceService } from '../services/persistence.service';
 import { Task } from '../models/task';
 import { DatabaseService } from '../services/database.service';
 import { config } from 'process';
+import { AudioService } from '../services/audio.service';
 
 @Component({
   selector: 'app-chronograph',
@@ -20,7 +21,6 @@ import { config } from 'process';
 export class ChronographComponent implements OnInit {
   @ViewChild('cd', { static: false }) countdown: CountdownComponent;
   startTime: number;
-  timesUp = new Audio('assets/audio/ding.wav');
   secondsLeft: BehaviorSubject<number> = new BehaviorSubject(0);
   notifications: number[] = [...Array(3600).keys()].splice(1,3600);
   pathRemaining = {};
@@ -36,7 +36,7 @@ export class ChronographComponent implements OnInit {
     notify: this.notifications
   });
 
-  constructor(public persistence: PersistenceService, public db: DatabaseService) {
+  constructor(public persistence: PersistenceService, public db: DatabaseService, public audioService: AudioService) {
   }
 
   ngOnInit(): void {
@@ -98,7 +98,7 @@ export class ChronographComponent implements OnInit {
     }
     if (e.action === 'done'){
       if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
-        this.timesUp.play();
+        this.audioService.playAudio();
         // this.persistence.addUnfinishedTask({id: Date.now(), createdAt: new Date(Date.now()), duration: this.startTime} as Task);
         this.db.table('unfinishedTasks').add({createdAt: new Date(Date.now()), duration: this.startTime} as Task);
       }
@@ -106,7 +106,7 @@ export class ChronographComponent implements OnInit {
     }
     if(e.action === 'stop'){
       if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
-        this.timesUp.play();
+        this.audioService.playAudio();
         this.db.table('unfinishedTasks').add({createdAt: new Date(Date.now()), duration: this.startTime - e.left/1000} as Task);
       }
       this.persistence.timerActive.next(false);
