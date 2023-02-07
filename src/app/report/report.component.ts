@@ -39,7 +39,11 @@ filterForm: FormGroup;
     this.filtersSubject.next(this.filterForm.value);
     this.filters = this.filterForm.value;
     this.filteredData = this.data
-    .filter(a => (a.createdAt >= this.filters.startDate && a.createdAt <= this.filters.endDate))
+    .filter(a => (this.filters.startDate === null ||
+                  this.filters.endDate === null ||
+                  a.createdAt >= this.filters.startDate && a.createdAt <= this.filters.endDate ||
+                  a.createdAt.getDay() == this.filters.startDate.getDay() ||
+                  a.createdAt.getDay() == this.filters.endDate.getDay()))
     .filter(a => (this.filters.categories.length === 0 || this.filters.categories?.includes(a.category)))
     .filter(a => (this.filters.tags.length === 0 || this.filters.tags?.includes(a.tag)));
   }
