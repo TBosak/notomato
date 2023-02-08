@@ -5,7 +5,7 @@
     "homepage": "https://ionicframework.com/",
     "scripts": {
         "ng": "ng",
-        "start": "ionic build && electron ./www/index.html",
+        "start": "ionic serve",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
@@ -33,7 +33,6 @@
         "cordova-plugin-statusbar": "^3.0.0",
         "dexie": "^3.2.3",
         "electron": "13.6.6",
-        "localforage": "^1.10.0",
         "mat-table-exporter": "^10.2.4",
         "moment": "^2.29.1",
         "ngx-countdown": "^13.0.0",
