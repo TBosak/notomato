@@ -5,7 +5,7 @@ A Pomodoro task management application built with Ionic framework using Dexie.js
 - Add task with details of what was accomplished/completed during the [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique) session
 - Edit existing tasks
 - Submit tasks to save them to a sortable and filterable table
-- Export tasks in several different formats (e.g. CSV, PDF)
+- Export tasks in several different formats (e.g. CSV, Excel...)
 
 ## Requirements✅
 - [Node.js](https://nodejs.org/en/download/)
