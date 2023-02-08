@@ -1,3 +1,4 @@
+<div id="report">
 <ion-card>
   <form [formGroup]="filterForm" novalidate>
     <ion-grid>
@@ -57,4 +58,5 @@
     </ion-grid>
 </form>
 </ion-card>
-<app-table [data]="filteredData" [settings]="false"></app-table>
+<app-table [hidden]="!filteredData" [data]="filteredData" [settings]="false"></app-table>
+</div>

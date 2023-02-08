@@ -9,11 +9,11 @@ table{
 }
 
 ion-card {
-  height: 90%;
+  max-height: 90%;
   width: 100%;
+  overflow: auto;
   // border-radius: var(--radius-4);
   // box-shadow: var(--shadow-6);
-  overflow: auto;
 }
 
 button{

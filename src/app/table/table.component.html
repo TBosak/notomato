@@ -1,6 +1,6 @@
 <ion-card>
     <ion-card-content>
-        <mat-table matTableExporter [dataSource]="data" #exporter="matTableExporter" class="mat-elevation-z0" [hiddenColumns]="[5]">
+        <mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" class="mat-elevation-z0" [hiddenColumns]="[5]">
 
             <ng-container matColumnDef="tag">
                 <mat-header-cell *matHeaderCellDef> Tag </mat-header-cell>
@@ -39,6 +39,8 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
             <div id="empty" *matNoDataRow>No tasks found</div>
         </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons>
+        </mat-paginator>
     </ion-card-content>
 </ion-card>
 <ion-grid>

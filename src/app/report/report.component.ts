@@ -14,7 +14,6 @@ import { Filters } from '../models/filters';
 })
 export class ReportComponent implements OnInit {
 filters: Filters = new Filters();
-filtersSubject: BehaviorSubject<Filters> = new BehaviorSubject<Filters>(new Filters());
 finished$: Observable<Task[]>;
 filteredData: Task[];
 data: Task[];
@@ -30,26 +29,30 @@ filterForm: FormGroup;
     this.finished$ = liveQuery(() => this.db.table('finishedTasks').toArray());
     this.finished$.subscribe((data) => {
       this.data = data;
-      this.tagOpts = data.map(a => a.tag);
-      this.catOpts = data.map(a => a.category);
+      this.tagOpts = [...new Set(data.map(a => a.tag))];
+      this.catOpts = [...new Set(data.map(a => a.category))];
     });
   }
 
   submitFilters() {
-    this.filtersSubject.next(this.filterForm.value);
     this.filters = this.filterForm.value;
     this.filteredData = this.data
     .filter(a => (this.filters.startDate === null ||
                   this.filters.endDate === null ||
                   a.createdAt >= this.filters.startDate && a.createdAt <= this.filters.endDate ||
-                  a.createdAt.getDay() == this.filters.startDate.getDay() ||
-                  a.createdAt.getDay() == this.filters.endDate.getDay()))
-    .filter(a => (this.filters.categories.length === 0 || this.filters.categories?.includes(a.category)))
-    .filter(a => (this.filters.tags.length === 0 || this.filters.tags?.includes(a.tag)));
+                  a.createdAt.getDay() === this.filters.startDate.getDay() ||
+                  a.createdAt.getDay() === this.filters.endDate.getDay()))
+    .filter(a => (this.filters.categories?.length === 0 ||
+                  this.filters.categories === null ||
+                  this.filters.categories?.includes(a.category)))
+    .filter(a => (this.filters.tags?.length === 0 ||
+                  this.filters.tags === null  ||
+                  this.filters.tags?.includes(a.tag)));
   }
 
   clearFilters() {
     this.filterForm.reset();
-    this.filtersSubject.next(new Filters());
+    this.filters = new Filters();
+    this.filteredData = null;
   }
 }
