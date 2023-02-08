@@ -39,7 +39,7 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
             <div id="empty" *matNoDataRow>No tasks found</div>
         </mat-table>
-        <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons>
+        <mat-paginator [hidden]="!dataSource.data.length || dataSource.data.length < 6" [pageSizeOptions]="[5, 10]" showFirstLastButtons>
         </mat-paginator>
     </ion-card-content>
 </ion-card>
