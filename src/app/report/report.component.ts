@@ -40,8 +40,8 @@ filterForm: FormGroup;
     .filter(a => (this.filters.startDate === null ||
                   this.filters.endDate === null ||
                   a.createdAt >= this.filters.startDate && a.createdAt <= this.filters.endDate ||
-                  a.createdAt.getDay() === this.filters.startDate.getDay() ||
-                  a.createdAt.getDay() === this.filters.endDate.getDay()))
+                  a.createdAt.getDate() === this.filters.startDate.getDate() ||
+                  a.createdAt.getDate() === this.filters.endDate.getDate()))
     .filter(a => (this.filters.categories?.length === 0 ||
                   this.filters.categories === null ||
                   this.filters.categories?.includes(a.category)))

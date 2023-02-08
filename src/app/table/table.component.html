@@ -43,7 +43,7 @@
         </mat-paginator>
     </ion-card-content>
 </ion-card>
-<ion-grid>
+<ion-grid [hidden]="!dataSource.data.length">
     <ion-row>
         <ion-col>
             <ion-button color="dark" expand="block" (click)="exporter.exportTable('xlsx', {fileName:'notomato', sheet: 'tasks', Props: {Author: 'notomato'}})">Excel</ion-button>
