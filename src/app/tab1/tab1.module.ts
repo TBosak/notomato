@@ -8,7 +8,6 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { CountdownConfig, CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
 import { ChronographComponent } from '../chronograph/chronograph.component';
-import { PipesModule } from '../pipes.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -32,7 +31,6 @@ export function countdownConfigFactory(): CountdownConfig {
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
     CountdownModule,
-    PipesModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

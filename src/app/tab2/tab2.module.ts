@@ -16,7 +16,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { CountdownModule } from 'ngx-countdown';
-import { PipesModule } from '../pipes.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TableComponent } from '../table/table.component';
@@ -28,7 +27,6 @@ import { TableComponent } from '../table/table.component';
     FormsModule,
     ExploreContainerComponentModule,
     CountdownModule,
-    PipesModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

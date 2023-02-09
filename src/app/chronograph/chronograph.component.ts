@@ -44,15 +44,6 @@ export class ChronographComponent implements OnInit {
     this.countDownConfig.subscribe(config => {
       this.startTime = config.leftTime;
     });
-
-    // this.secondsLeft.subscribe({
-    //   next:(value)=>{
-    //     console.log(value + 'passed to subscription');
-    //     this.setRemainingPathColor(value);
-    //     this.pathRemaining = {'stroke-dasharray': `${this.calculateDashArray(value)}`};
-    //     console.log(`${this.calculateDashArray(value)}`);
-    //   }
-    // });
   }
 
   startTimer() {
