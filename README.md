@@ -36,3 +36,5 @@ If you find a bug or want to request a feature, please open an issue. Pull reque
 
 ## License📜
 notomato is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V5LC4XTQDDE82&source=url)
