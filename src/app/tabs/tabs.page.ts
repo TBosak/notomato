@@ -8,9 +8,4 @@ import { Component } from '@angular/core';
 export class TabsPage {
 
   constructor() {}
-  // addEventListener('click', e => {
-  //   const t = e.target;
-  //   if(t.('href'))
-  //     {t.parentNode.style.setProperty('--k', +_t.style.getPropertyValue('--i'));};
-  // });
 }

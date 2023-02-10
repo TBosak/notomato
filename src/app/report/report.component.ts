@@ -36,18 +36,24 @@ filterForm: FormGroup;
 
   submitFilters() {
     this.filters = this.filterForm.value;
-    this.filteredData = this.data
-    .filter(a => (this.filters.startDate === null ||
-                  this.filters.endDate === null ||
-                  a.createdAt >= this.filters.startDate && a.createdAt <= this.filters.endDate ||
-                  a.createdAt.getDate() === this.filters.startDate.getDate() ||
-                  a.createdAt.getDate() === this.filters.endDate.getDate()))
-    .filter(a => (this.filters.categories?.length === 0 ||
-                  this.filters.categories === null ||
-                  this.filters.categories?.includes(a.category)))
-    .filter(a => (this.filters.tags?.length === 0 ||
-                  this.filters.tags === null  ||
-                  this.filters.tags?.includes(a.tag)));
+    let filteredData = this.data;
+
+    if (this.filters.startDate !== null && this.filters.endDate !== null) {
+      filteredData = filteredData.filter(a =>
+        (a.createdAt >= this.filters.startDate && a.createdAt <= this.filters.endDate) ||
+        (a.createdAt.getDate() === this.filters.startDate.getDate()) ||
+        (a.createdAt.getDate() === this.filters.endDate.getDate()));
+    }
+
+    if (this.filters.categories?.length > 0 && this.filters.categories !== null) {
+      filteredData = filteredData.filter(a => this.filters.categories.includes(a.category));
+    }
+
+    if (this.filters.tags?.length > 0 && this.filters.tags !== null) {
+      filteredData = filteredData.filter(a => this.filters.tags.includes(a.tag));
+    }
+
+    this.filteredData = filteredData;
   }
 
   clearFilters() {

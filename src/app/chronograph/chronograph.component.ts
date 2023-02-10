@@ -79,28 +79,28 @@ export class ChronographComponent implements OnInit {
   }
 
   handleEvent(e: CountdownEvent) {
-    if (e.action === 'start') {
-      this.remainingPathColor = this.colorCodes.base.color;
-      this.persistence.timerActive.next(true);
-    }
-    if (e.action === 'notify'){
-      this.setRemainingPathColor(e.left/1000);
-      this.pathRemaining = {'stroke-dasharray': `${this.calculateDashArray(e.left/1000)}`};
-    }
-    if (e.action === 'done'){
-      if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
-        this.audioService.playAudio();
-        // this.persistence.addUnfinishedTask({id: Date.now(), createdAt: new Date(Date.now()), duration: this.startTime} as Task);
-        this.db.table('unfinishedTasks').add({createdAt: new Date(Date.now()), duration: this.startTime} as Task);
-      }
-      this.persistence.timerActive.next(false);
-    }
-    if(e.action === 'stop'){
-      if(this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0){
-        this.audioService.playAudio();
-        this.db.table('unfinishedTasks').add({createdAt: new Date(Date.now()), duration: this.startTime - e.left/1000} as Task);
-      }
-      this.persistence.timerActive.next(false);
+    switch (e.action) {
+      case 'start':
+        this.remainingPathColor = this.colorCodes.base.color;
+        this.persistence.timerActive.next(true);
+        break;
+      case 'notify':
+        this.setRemainingPathColor(e.left/1000);
+        this.pathRemaining = {'stroke-dasharray': `${this.calculateDashArray(e.left/1000)}`};
+        break;
+      case 'done':
+      case 'stop':
+        if (this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0) {
+          this.audioService.playAudio();
+          this.db.table('unfinishedTasks').add({
+            createdAt: new Date(Date.now()),
+            duration: (e.action === 'done') ? this.startTime : this.startTime - e.left/1000
+          } as Task);
+        }
+        this.persistence.timerActive.next(false);
+        break;
+      default:
+        break;
     }
   }
 

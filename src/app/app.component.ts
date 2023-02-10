@@ -18,20 +18,22 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.db.table('settings').add(
       new Settings(15,30,5,15,true,'assets/audio/bell.mp3'));
+
     this.settingsObservable$ = liveQuery(() => this.db.table('settings').toArray());
     this.settingsObservable$.subscribe(data => {
-      if(Object.values(data[0]).every(value => value !== undefined && value !== null && value !== 0)){
-        this.persistence.settings = data[0];
-        this.audio.soundEnabled = data[0].soundEnabled;
-        this.audio.soundFile = data[0].soundFile;
-      }
+      this.updatePersistenceAndAudio(data[0]);
     });
+
     this.db.table('settings').toArray().then(data => {
-      if(Object.values(data[0]).every(value => value !== undefined && value !== null && value !== 0)){
-        this.persistence.settings = data[0];
-        this.audio.soundEnabled = data[0].soundEnabled;
-        this.audio.soundFile = data[0].soundFile;
-      }
+      this.updatePersistenceAndAudio(data[0]);
     });
+  }
+
+  updatePersistenceAndAudio(settings) {
+    if (Object.values(settings).every(value => value !== undefined && value !== null && value !== 0)) {
+      this.persistence.settings = settings;
+      this.audio.soundEnabled = settings.soundEnabled;
+      this.audio.soundFile = settings.soundFile;
+    }
   }
 }

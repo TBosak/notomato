@@ -22,9 +22,6 @@ export class Tab1Page implements AfterViewInit, OnInit {
   timerActive = false;
   cd: CountdownComponent;
   unfinishedHidden = new BehaviorSubject<boolean>(true);
-  pomodoro = 1800;
-  short = 300;
-  long = 900;
   data: {'id': number; 'name': string}[];
   constructor(public notificationService: NotificationService, public persistence: PersistenceService, public db: DatabaseService) {
     this.data = Array(100).fill('').map((x, i) => ({id: i + 1, name: 'Item ' + (i + 1)}));
