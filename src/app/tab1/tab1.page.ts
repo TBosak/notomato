@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewChild, AfterViewInit, OnInit } 
 import { IonInfiniteScroll } from '@ionic/angular';
 import { CountdownComponent } from 'ngx-countdown';
 import { ChronographComponent } from '../chronograph/chronograph.component';
-import { NotificationService } from '../services/notification.service';
 import { BehaviorSubject } from 'rxjs';
-import { Task } from '../models/task';
 import { PersistenceService } from '../services/persistence.service';
 import { liveQuery } from 'dexie';
 import { DatabaseService } from '../services/database.service';
@@ -23,13 +21,11 @@ export class Tab1Page implements AfterViewInit, OnInit {
   cd: CountdownComponent;
   unfinishedHidden = new BehaviorSubject<boolean>(true);
   data: {'id': number; 'name': string}[];
-  constructor(public notificationService: NotificationService, public persistence: PersistenceService, public db: DatabaseService) {
+  constructor(public persistence: PersistenceService, public db: DatabaseService) {
     this.data = Array(100).fill('').map((x, i) => ({id: i + 1, name: 'Item ' + (i + 1)}));
   }
 
   ngOnInit(): void {
-  //  this.persistence.finishedTasks.subscribe( tasks => this.finished = tasks );
-  //  this.persistence.unfinishedTasks.subscribe( tasks => this.unfinished = tasks );
    this.persistence.timerActive.subscribe( active => this.timerActive = active );
    this.finished$ = liveQuery(() => this.db.table('finishedTasks').toArray());
    this.unfinished$ = liveQuery(() => this.db.table('unfinishedTasks').toArray());
@@ -56,14 +52,6 @@ export class Tab1Page implements AfterViewInit, OnInit {
     this.chronograph.setTime(time);
     this.persistence.breakTimer.next(brk);
     this.cd.begin();
-  }
-
-  toggleNotifications() {
-    this.notificationService.notifyMe();
-  }
-
-  notifications(){
-    return this.notificationService.notificationsOn();
   }
 
   toggleInfiniteScroll() {
