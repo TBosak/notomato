@@ -91,11 +91,12 @@ export class ChronographComponent implements OnInit {
       case 'done':
       case 'stop':
         if (this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0) {
-          this.audioService.playAudio();
+          if (e.action === 'done') new Notification('Notomato', { body: "Time's up!", icon: 'assets/icon/icon.png' });
           this.db.table('unfinishedTasks').add({
             createdAt: new Date(Date.now()),
             duration: (e.action === 'done') ? this.startTime : this.startTime - e.left/1000
           } as Task);
+          this.audioService.playAudio();
         }
         this.persistence.timerActive.next(false);
         break;

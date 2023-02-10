@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     this.db.table('settings').toArray().then(data => {
       this.updatePersistenceAndAudio(data[0]);
     });
+    Notification.requestPermission();
   }
 
   updatePersistenceAndAudio(settings) {
