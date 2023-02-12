@@ -19,6 +19,5 @@
   </svg>
     <span #label id="base-timer-label" class="base-timer__label">
       <countdown #cd (event)="handleEvent($event)" [config]="this.countDownConfig | async"></countdown>
-      <!-- {{displayTime | async}} -->
     </span>
 </div>
