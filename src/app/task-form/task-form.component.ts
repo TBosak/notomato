@@ -18,7 +18,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.task.description) {
+    if(this.task.description || this.task.category || this.task.tag) {
       this.taskForm.patchValue(this.task);
     };
   }

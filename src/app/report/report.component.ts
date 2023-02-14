@@ -53,6 +53,15 @@ filterForm: FormGroup;
       filteredData = filteredData.filter(a => this.filters.tags.includes(a.tag));
     }
 
+    if (this.filters.search !== null && this.filters.search !== '') {
+      console.log(this.filters.search);
+      filteredData = Array.from(new Set(
+      [...filteredData.filter(a => a.description?.toLowerCase().includes(this.filters.search.toLowerCase())),
+      ...filteredData.filter(a => a.category?.toLowerCase().includes(this.filters.search.toLowerCase())),
+      ...filteredData.filter(a => a.tag?.toLowerCase().includes(this.filters.search.toLowerCase()))]
+      ));
+    }
+
     this.filteredData = filteredData;
   }
 

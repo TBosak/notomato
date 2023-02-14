@@ -4,5 +4,6 @@ export class Filters{
       public tags?: string[],
       public startDate?: Date,
       public endDate?: Date,
+      public search?: string,
       ){}
 }
