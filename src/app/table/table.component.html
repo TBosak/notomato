@@ -18,8 +18,8 @@
             </ng-container>
 
             <ng-container matColumnDef="duration">
-                <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
-                <mat-cell *matCellDef="let task"> {{task.duration/60}} minutes </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Duration (minutes) </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{(task.duration/60).toFixed(1)}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="date">

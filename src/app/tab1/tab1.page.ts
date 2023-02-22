@@ -18,6 +18,7 @@ export class Tab1Page implements AfterViewInit, OnInit {
   finished$: any;
   unfinished$: any;
   timerActive = false;
+  timerPaused = false;
   cd: CountdownComponent;
   unfinishedHidden = new BehaviorSubject<boolean>(true);
   data: {'id': number; 'name': string}[];
@@ -27,6 +28,7 @@ export class Tab1Page implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
    this.persistence.timerActive.subscribe( active => this.timerActive = active );
+   this.persistence.timerPaused.subscribe( paused => this.timerPaused = paused );
    this.finished$ = liveQuery(() => this.db.table('finishedTasks').toArray());
    this.unfinished$ = liveQuery(() => this.db.table('unfinishedTasks').toArray());
    this.unfinished$.subscribe( tasks => this.unfinishedHidden.next(tasks.length === 0) );
@@ -49,6 +51,10 @@ export class Tab1Page implements AfterViewInit, OnInit {
   }
 
   setTimer(time: number, brk: boolean = false){
+    if(!brk){
+      const tag = prompt("Enter a tag for tracking your task:", "Documentation");
+      this.persistence.currentTag.next(tag);
+    }
     this.chronograph.setTime(time);
     this.persistence.breakTimer.next(brk);
     this.cd.begin();
