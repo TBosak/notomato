@@ -19,6 +19,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { TableComponent } from '../table/table.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SettingsComponent } from '../settings/settings.component';
 
 export function countdownConfigFactory(): CountdownConfig {
   return {};
@@ -40,9 +42,10 @@ export function countdownConfigFactory(): CountdownConfig {
     MatRadioModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatTableExporterModule
+    MatTableExporterModule,
+    MatDialogModule
   ],
   providers: [{ provide: CountdownGlobalConfig, useFactory: countdownConfigFactory }],
-  declarations: [Tab1Page, ChronographComponent, TableComponent, TaskFormComponent]
+  declarations: [Tab1Page, ChronographComponent, TableComponent, TaskFormComponent, SettingsComponent]
 })
 export class Tab1PageModule {}

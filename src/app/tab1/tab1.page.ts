@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 import { PersistenceService } from '../services/persistence.service';
 import { liveQuery } from 'dexie';
 import { DatabaseService } from '../services/database.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SettingsComponent } from '../settings/settings.component';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -22,7 +24,8 @@ export class Tab1Page implements AfterViewInit, OnInit {
   cd: CountdownComponent;
   unfinishedHidden = new BehaviorSubject<boolean>(true);
   data: {'id': number; 'name': string}[];
-  constructor(public persistence: PersistenceService, public db: DatabaseService) {
+
+  constructor(public persistence: PersistenceService, public db: DatabaseService, public dialog: MatDialog) {
     this.data = Array(100).fill('').map((x, i) => ({id: i + 1, name: 'Item ' + (i + 1)}));
   }
 
@@ -48,6 +51,10 @@ export class Tab1Page implements AfterViewInit, OnInit {
         event.target.disabled = true;
       }
     }, 500);
+  }
+
+  openSettings(){
+    this.dialog.open(SettingsComponent);
   }
 
   setTimer(time: number, brk: boolean = false){
