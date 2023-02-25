@@ -55,6 +55,9 @@ export class Tab1Page implements AfterViewInit, OnInit {
       const tag = prompt("Enter a tag for tracking your task:", "Documentation");
       this.persistence.currentTag.next(tag);
     }
+    else{
+      this.persistence.currentTag.next(null);
+    }
     this.chronograph.setTime(time);
     this.persistence.breakTimer.next(brk);
     this.cd.begin();
