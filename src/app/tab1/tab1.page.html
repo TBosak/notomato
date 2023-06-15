@@ -23,10 +23,10 @@
                                     <ion-icon src="assets\icon\clock.svg"></ion-icon>
                                 </ion-fab-button>
                                 <ion-fab-list side="top">
-                                    <ion-fab-button *ngIf="!timerActive" (click)="chronograph.resumeTimer()">
+                                    <ion-fab-button *ngIf="timerPaused" (click)="chronograph.resumeTimer()">
                                         <ion-icon name="play-circle-outline"></ion-icon>
                                     </ion-fab-button>
-                                    <ion-fab-button *ngIf="timerActive" (click)="chronograph.pauseTimer()">
+                                    <ion-fab-button *ngIf="!timerPaused" (click)="chronograph.pauseTimer()">
                                         <ion-icon name="pause-circle-outline"></ion-icon>
                                     </ion-fab-button>
                                 </ion-fab-list>
@@ -81,7 +81,7 @@
                                 </ion-fab-list>
                             </ion-fab>
                             <ion-fab vertical="top" horizontal="end" slot="fixed">
-                                <ion-fab-button color="dark">
+                                <ion-fab-button (click)="openSettings()" color="dark">
                                     <ion-icon src="assets\icon\settings.svg"></ion-icon>
                                 </ion-fab-button>
                             </ion-fab>

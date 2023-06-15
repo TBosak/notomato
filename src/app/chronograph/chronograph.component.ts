@@ -5,11 +5,10 @@
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { PersistenceService } from '../services/persistence.service';
 import { Task } from '../models/task';
 import { DatabaseService } from '../services/database.service';
-import { config } from 'process';
 import { AudioService } from '../services/audio.service';
 
 @Component({
@@ -49,26 +48,28 @@ export class ChronographComponent implements OnInit {
   startTimer() {
     this.countdown.begin();
     this.persistence.timerActive.next(true);
+    this.persistence.timerPaused.next(false);
   }
 
   stopTimer() {
     this.countdown.stop();
-    this.persistence.timerActive.next(false);
   }
 
   resetTimer() {
     this.countdown.restart();
     this.persistence.timerActive.next(true);
+    this.persistence.timerPaused.next(false);
   }
 
   pauseTimer() {
     this.countdown.pause();
-    this.persistence.timerActive.next(false);
+    this.persistence.timerPaused.next(true);
   }
 
   resumeTimer() {
     this.countdown.resume();
-    this.persistence.timerActive.next(false);
+    this.persistence.timerActive.next(true);
+    this.persistence.timerPaused.next(false);
   }
 
   setTime(time) {
@@ -93,11 +94,13 @@ export class ChronographComponent implements OnInit {
         if (this.persistence.breakTimer.getValue() === false && !isNaN(this.startTime) && this.startTime > 0) {
           if (e.action === 'done') new Notification('Notomato', { body: "Time's up!", icon: 'assets/icon/icon.png' });
           this.db.table('unfinishedTasks').add({
+            tag: this.persistence.currentTag.getValue(),
             createdAt: new Date(Date.now()),
             duration: (e.action === 'done') ? this.startTime : this.startTime - e.left/1000
           } as Task);
           this.audioService.playAudio();
         }
+        this.persistence.currentTag.next(null);
         this.persistence.timerActive.next(false);
         break;
       default:
